@@ -3,5 +3,5 @@
 // service_role 키는 절대 여기에 넣지 마세요.
 window.WAVE_CONFIG = {
   supabaseUrl: "",
-  supabaseAnonKey: "",
+  supabaseAnonKey: "sb_publishable_dUO71vcTsf8a0aCtel27fg_OYEIK8NC",
 };
