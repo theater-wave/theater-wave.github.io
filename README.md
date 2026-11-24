@@ -12,7 +12,7 @@
 2. **SQL Editor**에 `supabase/schema.sql` 내용을 붙여넣고 Run 합니다.
 3. **Project Settings → API**에서 `Project URL`과 `anon public` 키를 복사해 `config.js`에 넣습니다.
 4. **GitHub 저장소 → Settings → Pages**에서 Source를 `Deploy from a branch`, Branch를 `main` / `/(root)`로 저장합니다.
-5. 1~2분 뒤 `https://eumin26.github.io/-/` 에서 사이트가 열립니다.
+5. 1~2분 뒤 `https://eumin26.github.io/theatre-wave/` 에서 사이트가 열립니다.
 
 ## 운영
 
