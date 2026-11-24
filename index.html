@@ -9,11 +9,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400;600&family=Noto+Sans:wght@300;400&family=Noto+Sans+KR:wght@300;400&display=swap">
 <style>
-/* Fonts: S-Core Dream stands in for NemoRound (design), Baekmuk Gulim is the design font itself (fonts/BAEKMUK-LICENSE.txt),
+/* Fonts: S-Core Dream stands in for NemoRound (design),
    Noto Sans stands in for Canva Sans. */
 @font-face { font-family: "S-Core Dream"; font-weight: 200; font-display: swap; src: url("https://cdn.jsdelivr.net/gh/fonts-archive/S-CoreDream/SCDreamExtraLight.woff2") format("woff2"); }
 @font-face { font-family: "S-Core Dream"; font-weight: 300; font-display: swap; src: url("https://cdn.jsdelivr.net/gh/fonts-archive/S-CoreDream/SCDreamLight.woff2") format("woff2"); }
-@font-face { font-family: "Baekmuk Gulim"; font-weight: 400; font-display: swap; src: url("fonts/baekmuk-gulim.woff2") format("woff2"); }
 /* Layout: the poster is drawn on a fixed 1186-unit-wide frame (1rem = 16 units) and the whole frame scales with the screen,
    so letter-spacing and line breaks are identical on every device. Single deliberate look. */
 :root {
@@ -32,7 +31,6 @@
   --foam: #ffffff;
   --font: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
   --font-round: "S-Core Dream", "IBM Plex Sans KR", "Apple SD Gothic Neo", sans-serif;
-  --font-gulim: "Baekmuk Gulim", "IBM Plex Sans KR", "Apple SD Gothic Neo", sans-serif;
   --font-foot: "Noto Sans", "Noto Sans KR", "IBM Plex Sans KR", sans-serif;
   color-scheme: light;
 }
@@ -69,7 +67,7 @@ h1 { font-family: var(--font-round); margin: 6.125rem 0 0; padding-left: 2.375re
 .note:focus-within { background: rgba(255,255,255,.17); box-shadow: 0 0 0 1px rgba(255,255,255,.35); }
 .note textarea {
   display: block; width: 25rem; height: 3.25rem; resize: none; border: 0; outline: none; background: transparent; padding: 0;
-  color: var(--foam); font: 400 .875rem/1.625rem var(--font-gulim); letter-spacing: .13em; overflow-y: auto;
+  color: var(--foam); font: 300 .875rem/1.625rem var(--font-round); letter-spacing: .13em; overflow-y: auto;
 }
 .note textarea::placeholder { color: rgba(255,255,255,.8); }
 .note button {
