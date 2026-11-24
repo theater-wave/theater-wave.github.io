@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="떠나지 못한 감정들에 대하여 — 관객이 남긴 마음이 파도 위의 점이 되어 쌓이는 참여형 아카이브.">
+<title>파도가 밀려올 때</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300;400&display=swap">
+<style>
+/* Layout: the poster is drawn on a fixed 1186-unit-wide frame (1rem = 16 units) and the whole frame scales with the screen,
+   so letter-spacing and line breaks are identical on every device. Single deliberate look. */
+:root {
+  --sea: #3c5a9e;
+  --mist: #a7b2cd;
+  --fog: #e4e5ea;
+  --shore: #f8f6ef;
+  --ink: #1d2230;
+  --ink-soft: #545b6c;
+  --foam: #ffffff;
+  --font: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
+  color-scheme: light;
+}
+html { font-size: calc(min(100vw, 1186px) / 74.125); scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--shore); color: var(--ink); font-family: var(--font); font-weight: 400; overflow-x: hidden; }
+.frame { width: 74.125rem; margin: 0 auto; position: relative; }
+.line { display: block; white-space: nowrap; }
+
+/* ---------- sky ---------- */
+.sky {
+  background: var(--sea); color: var(--foam);
+  margin-top: calc(-1 * env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.sky .frame { padding-top: 3.375rem; padding-bottom: 4.375rem; }
+.nav { display: flex; align-items: center; height: 1.5rem; padding: 0 3.25rem; white-space: nowrap; }
+.brand { font-weight: 300; letter-spacing: .4em; font-size: 1.25rem; }
+.nav .rule { width: 36rem; height: 1px; background: rgba(255,255,255,.7); margin-left: 2.6rem; }
+.nav ul { list-style: none; display: flex; gap: 2.2rem; margin: 0 0 0 auto; padding: 0; }
+.nav a { color: rgba(255,255,255,.8); text-decoration: none; font-weight: 200; letter-spacing: .3em; font-size: 1.125rem; border-bottom: 1px solid transparent; transition: color .2s, border-color .2s; }
+.nav a:hover, .nav a:focus-visible { color: var(--foam); border-bottom-color: rgba(255,255,255,.7); outline: none; }
+
+h1 { margin: 4rem 0 0; text-align: center; font-weight: 200; font-size: 3rem; line-height: 1.4; letter-spacing: .16em; white-space: nowrap; }
+.lead { margin: 4.375rem 0 0; text-align: center; font-size: 1.0625rem; line-height: 2.25rem; font-weight: 300; }
+
+.note {
+  position: relative; width: 38.375rem; height: 8.125rem; margin: 3.9375rem 0 0 18.4375rem;
+  background: rgba(255,255,255,.12); border-radius: 1.875rem;
+  padding: 2.4375rem 2.375rem 0;
+  transition: background .25s, box-shadow .25s;
+}
+.note:focus-within { background: rgba(255,255,255,.17); box-shadow: 0 0 0 1px rgba(255,255,255,.35); }
+.note textarea {
+  display: block; width: 25rem; height: 3.25rem; resize: none; border: 0; outline: none; background: transparent; padding: 0;
+  color: var(--foam); font: 300 .875rem/1.625rem var(--font); letter-spacing: .2em; overflow-y: auto;
+}
+.note textarea::placeholder { color: rgba(255,255,255,.8); }
+.note button {
+  position: absolute; right: 1.5rem; bottom: 1.25rem;
+  border: 1px solid rgba(255,255,255,.55); background: transparent; color: var(--foam);
+  font: 300 .8125rem/1 var(--font); letter-spacing: .25em; padding: .5rem .9rem .5rem 1.15rem; border-radius: 999px; cursor: pointer;
+  transition: background .2s, color .2s, opacity .2s;
+}
+.note button:hover:not(:disabled), .note button:focus-visible { background: var(--foam); color: var(--sea); outline: none; }
+.note button:disabled { opacity: .35; cursor: default; }
+.status { position: absolute; left: 0; right: 0; bottom: 1.6rem; margin: 0; text-align: center; font-size: .8125rem; font-weight: 300; color: rgba(255,255,255,.85); letter-spacing: .04em; white-space: nowrap; }
+
+/* ---------- tide ---------- */
+.tide {
+  position: relative; overflow-x: hidden; overflow-x: clip;
+  background: linear-gradient(180deg, var(--sea) 0%, #6276aa 13%, var(--mist) 34%, #ccd1de 52%, var(--fog) 68%, #efeee9 86%, var(--shore) 100%);
+  padding-top: 7.375rem; padding-bottom: 4.4rem;
+}
+.hint { margin: 0 0 0 10.5rem; color: var(--foam); font-size: .9375rem; line-height: 1.625rem; font-weight: 300; }
+.arrow { display: block; margin: .3rem 0 0 6.2rem; width: max-content; font-size: 1rem; line-height: 1; transform: rotate(18deg); }
+.field { position: relative; height: 26.5rem; margin-top: -.6rem; }
+.field svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; display: block; }
+.field path { fill: none; stroke: var(--foam); stroke-width: 1.3; opacity: .92; }
+.field circle.dot { fill: var(--foam); }
+.field circle.dot.ghost { fill: rgba(255,255,255,.4); }
+.field circle.dot.on { fill: var(--sea); stroke: var(--foam); stroke-width: 2.5; }
+.field circle.hit { fill: transparent; cursor: pointer; outline: none; }
+.field circle.hit:focus-visible { stroke: var(--foam); stroke-width: 1.5; }
+.field circle.dot.fresh { animation: pulse 1.6s ease-out 2; transform-box: fill-box; transform-origin: center; }
+@keyframes pulse { 0% { transform: scale(1); } 40% { transform: scale(2.6); } 100% { transform: scale(1); } }
+.empty { position: absolute; left: 0; right: 0; bottom: 2rem; margin: 0; text-align: center; color: var(--ink-soft); font-size: .875rem; font-weight: 300; letter-spacing: .08em; white-space: nowrap; }
+.tally { position: absolute; right: 3.25rem; bottom: 2rem; margin: 0; color: var(--ink-soft); font-size: .8125rem; letter-spacing: .12em; font-weight: 300; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* bubble is a reading overlay, kept at a legible real size */
+.bubble {
+  position: absolute; z-index: 5; width: min(300px, calc(100vw - 24px));
+  background: rgba(255,255,255,.97); color: var(--ink); border-radius: 14px;
+  padding: 14px 32px 12px 16px; box-shadow: 0 10px 34px rgba(40,56,100,.22);
+  font-size: 14px; line-height: 1.75; font-weight: 400;
+}
+.bubble p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 12em; overflow-y: auto; }
+.bubble .meta { margin-top: 8px; color: var(--ink-soft); font-size: 11px; letter-spacing: .08em; font-variant-numeric: tabular-nums; }
+.bubble .close { position: absolute; top: 6px; right: 8px; border: 0; background: none; color: var(--ink-soft); font-size: 18px; cursor: pointer; line-height: 1; padding: 2px; }
+
+/* ---------- shore ---------- */
+.about .frame { padding: 10.3rem 0 0 6.4375rem; }
+.about h2 { margin: 0; font-weight: 400; font-size: 2rem; line-height: 2.8rem; white-space: nowrap; }
+.about p { margin: 1.0625rem 0 0; font-size: 1.5rem; line-height: 2.25rem; }
+footer .frame { padding: 17.7rem 0 2.2rem; text-align: center; font-size: 1.0625rem; line-height: 1.5rem; white-space: nowrap; }
+footer a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+footer a:hover { border-bottom-color: currentColor; }
+footer .contact { display: inline-block; padding: 0 .4rem; border-radius: .3rem; }
+footer .contact.flash { animation: flash 1.6s ease-out; }
+@keyframes flash { 0% { background: #e3e6f0; } 100% { background: transparent; } }
+@media (prefers-reduced-motion: reduce) { .field circle.dot.fresh, footer .contact.flash { animation: none; } }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+</head>
+<body>
+<section class="sky">
+  <div class="frame">
+    <nav class="nav" aria-label="주요 메뉴">
+      <span class="brand">파도가 밀려올 때</span>
+      <span class="rule" aria-hidden="true"></span>
+      <ul>
+        <li><a href="#about" id="link-about">공연 안내</a></li>
+        <li><a href="#contact" id="link-contact">문의</a></li>
+      </ul>
+    </nav>
+
+    <h1>「떠나지 못한 감정들에 대하여」</h1>
+
+    <p class="lead">
+      <span class="line">어떤 감정은 끝내 설명되지 않고, 어떤 기억은 오래도록 마음에 남습니다.</span>
+      <span class="line">아직 정리되지 않은 생각, 문득 떠오르는 기억, 설명하기 어려운 감정, 끝내 전하지 못한 말.</span>
+      <span class="line">마음속에 머물러 있는 어떤 것이든 괜찮습니다. 지금 당신에게 밀려오는 마음을 자유롭게 남겨주세요.</span>
+    </p>
+
+    <form class="note" id="note-form" autocomplete="off">
+      <textarea id="note-text" maxlength="300" aria-label="남길 마음" placeholder="여러분의 마음을 남겨주세요.&#10;파동들이 모여 하나의 파도가 형성됩니다"></textarea>
+      <button type="submit" id="note-submit" disabled>남기기</button>
+    </form>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+<section class="tide">
+  <div class="frame">
+    <p class="hint"><span class="line">파도를 눌러서</span><span class="line">누군가의 남겨진 마음을 둘러보세요.</span><span class="arrow" aria-hidden="true">↓</span></p>
+  </div>
+  <div class="field" id="field">
+    <svg id="waves" role="img" aria-label="관객이 남긴 마음이 점으로 놓인 파도"></svg>
+    <p class="empty" id="empty">불러오는 중…</p>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="frame">
+    <h2>나의 완성되지 못한 질문</h2>
+    <p>
+      <span class="line">&lt;파도가 밀려올 때&gt;는 어쩌구저쩌구 이러한 내용 어떠한 감정 어쩌구저쩌구</span>
+      <span class="line">또어쩌구저쩌구 어쩌구저쩌구 멘트 채우기</span>
+      <span class="line">AI가 끝내 답하지 못한 질문, 이제 당신에게 건넵니다.</span>
+    </p>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="frame"><span class="contact" id="contact-line">문의 / 전화 02-3668-0007 | 온라인 <a href="https://theater.arko.or.kr" target="_blank" rel="noopener">theater.arko.or.kr</a></span></div>
+</footer>
+
+<script>
+(() => {
+  /* ----- scale the whole poster to the screen width (no scrollbar overflow) ----- */
+  const DESIGN = 1186;
+  function scaleRoot() {
+    const w = document.documentElement.clientWidth || window.innerWidth;
+    document.documentElement.style.fontSize = (Math.min(w, DESIGN) / DESIGN * 16) + "px";
+  }
+  scaleRoot();
+  addEventListener("resize", scaleRoot);
+  const unit = () => parseFloat(getComputedStyle(document.documentElement).fontSize) / 16; // 1 design px in real px
+
+  const NS = "http://www.w3.org/2000/svg";
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const field = document.getElementById("field");
+  const svg = document.getElementById("waves");
+  const emptyEl = document.getElementById("empty");
+  const form = document.getElementById("note-form");
+  const ta = document.getElementById("note-text");
+  const btn = document.getElementById("note-submit");
+  const statusEl = document.getElementById("status");
+
+  let entries = [];          // [{id, text, seq}]
+  let selected = null;
+  let freshId = null;
+  let W = 1186, H = 424;
+
+  document.getElementById("link-contact").addEventListener("click", () => {
+    const f = document.getElementById("contact-line");
+    f.classList.remove("flash"); void f.offsetWidth; f.classList.add("flash");
+  });
+
+  /* ----- the six fixed curves (design px; field top = design y 831) -----
+     Each curve is defined only by its crests and troughs. Between two of them it is a cubic with
+     level tangents at both ends, so every crest is round and every slope is a clean S. */
+  const TOP = 831;
+  const K = 0.42;  // tangent length as a share of the gap: lower = sharper crests, higher = flatter
+  const CURVES = [
+    [[-60,1092],[255,872],[478,1003],[702,931],[936,1028],[1250,904]],
+    [[-60,1098],[412,888],[642,988],[876,930],[1098,1000],[1250,990]],
+    [[-60,912],[70,915],[556,1050],[978,1029],[1250,1043]],
+    [[-60,1010],[196,1034],[648,895],[1004,976],[1250,936]],
+    [[-60,1137],[518,1021],[1068,1214],[1250,1200]],
+    [[-60,1006],[318,1079],[732,957],[1050,1070],[1250,1088]],
+  ];
+
+
+
+  const SEG = (p, q) => [p, [p[0] + K * (q[0] - p[0]), p[1]], [q[0] - K * (q[0] - p[0]), q[1]], q];
+  const bez = (P, t) => { const m = 1 - t; return [
+    m*m*m*P[0][0] + 3*m*m*t*P[1][0] + 3*m*t*t*P[2][0] + t*t*t*P[3][0],
+    m*m*m*P[0][1] + 3*m*m*t*P[1][1] + 3*m*t*t*P[2][1] + t*t*t*P[3][1] ]; };
+  // height of curve c at design x (x runs strictly left to right, so bisection is exact)
+  function yAtX(pts, x) {
+    let i = 0;
+    while (i < pts.length - 2 && x > pts[i + 1][0]) i++;
+    const P = SEG(pts[i], pts[i + 1]);
+    let lo = 0, hi = 1;
+    for (let n = 0; n < 30; n++) { const mid = (lo + hi) / 2; if (bez(P, mid)[0] < x) lo = mid; else hi = mid; }
+    return bez(P, (lo + hi) / 2)[1];
+  }
+
+  // Dot slots. The very first dot sits on the leftmost point where two curves cross (kept from the earlier layout).
+  // After it, every curve has 10 evenly spaced slots; they fill strictly left to right across the poster.
+  // When those are full, the halfway points between them fill, again left to right, then the quarter points, and so on.
+  const BASE = 10, GAP = 18;
+  const phases = CURVES.map((_, ci) => 0.3 + ((ci * 0.37) % 0.45));
+  const tToX = (t) => 30 + t / BASE * 1030;   // design x, kept clear of the right edge
+
+  // leftmost crossing (two crossings closer than GAP count as one)
+  let first = null;
+  {
+    const found = [];
+    for (let a = 0; a < CURVES.length; a++) for (let b = a + 1; b < CURVES.length; b++) {
+      const diff = (x) => yAtX(CURVES[a], x) - yAtX(CURVES[b], x);
+      let pd = diff(8);
+      for (let x = 9; x <= 1178; x++) {
+        const d = diff(x);
+        if ((pd < 0) !== (d < 0)) {
+          let lo = x - 1, hi = x;
+          for (let n = 0; n < 30; n++) { const m = (lo + hi) / 2; ((diff(lo) < 0) === (diff(m) < 0)) ? lo = m : hi = m; }
+          const cx = (lo + hi) / 2;
+          found.push({ x: cx, y: yAtX(CURVES[a], cx) });
+        }
+        pd = d;
+      }
+    }
+    found.sort((p, q) => p.x - q.x);
+    if (found.length) {
+      first = { x: found[0].x, y: found[0].y };
+      const q = found[1];
+      if (q && Math.hypot(q.x - first.x, q.y - first.y) < GAP) { first.x = (first.x + q.x) / 2; first.y = (first.y + q.y) / 2; }
+    }
+  }
+
+  const SLOTS = first ? [first] : [];
+  const tooClose = (x, y) => first && Math.hypot(first.x - x, first.y - y) < GAP;
+  let ghostCount = 0;
+  const SPACING = 34;   // design px: no two dots closer than this (until the poster is very full)
+  const skipped = [];
+  const addSpaced = (p) => { if (SLOTS.every((q) => Math.hypot(q.x - p.x, q.y - p.y) >= SPACING)) SLOTS.push(p); else skipped.push(p); };
+  for (let depth = 0; depth <= 4; depth++) {
+    const level = [];
+    CURVES.forEach((pts, ci) => {
+      const xs = [];
+      if (depth === 0) for (let k = 0; k < BASE; k++) xs.push(tToX(k + phases[ci]));
+      else {
+        const step = 1 / (1 << depth);
+        for (let k = 0; k < BASE - 1; k++) for (let t = step; t < 1; t += 2 * step) xs.push(tToX(k + phases[ci] + t));
+      }
+      xs.forEach((x) => level.push({ x, y: yAtX(pts, x) }));
+    });
+    level.sort((p, q) => p.x - q.x).forEach((p) => { if (!tooClose(p.x, p.y)) addSpaced(p); });
+    if (depth === 0) ghostCount = SLOTS.length;
+  }
+  // slots skipped for being too near another dot are only used once every well-spaced slot is taken
+  skipped.forEach((p) => { if (SLOTS.every((q) => Math.hypot(q.x - p.x, q.y - p.y) >= 14)) SLOTS.push(p); });
+
+  function toField(x, y) {
+    const s = unit(), off = (W - 1186 * s) / 2;
+    return [off + x * s, (y - TOP) * s];
+  }
+  function curvePath(pts) {
+    const F = pts.map(([x, y]) => toField(x, y));
+    // level run-in / run-out to the screen edges on screens wider than the poster
+    let d = `M${Math.min(0, F[0][0]).toFixed(1)} ${F[0][1].toFixed(1)}L${F[0][0].toFixed(1)} ${F[0][1].toFixed(1)}`;
+    for (let i = 0; i < F.length - 1; i++) {
+      const P = SEG(F[i], F[i + 1]);
+      d += `C${P[1][0].toFixed(1)} ${P[1][1].toFixed(1)} ${P[2][0].toFixed(1)} ${P[2][1].toFixed(1)} ${P[3][0].toFixed(1)} ${P[3][1].toFixed(1)}`;
+    }
+    const L = F[F.length - 1];
+    return d + `L${Math.max(W, L[0]).toFixed(1)} ${L[1].toFixed(1)}`;
+  }
+
+  const paths = CURVES.map(() => { const p = document.createElementNS(NS, "path"); svg.appendChild(p); return p; });
+  const dotLayer = document.createElementNS(NS, "g"); svg.appendChild(dotLayer);
+  let dots = [];
+
+  function draw() {
+    const s = unit();
+    CURVES.forEach((pts, i) => paths[i].setAttribute("d", curvePath(pts)));
+
+    dotLayer.textContent = "";
+    dots = [];
+    const shown = Math.min(SLOTS.length, Math.max(ghostCount, entries.length));
+    for (let idx = 0; idx < shown; idx++) {
+      const entry = entries[idx] || null;
+      const [x, y] = toField(SLOTS[idx].x, SLOTS[idx].y);
+      const el = document.createElementNS(NS, "circle");
+      el.setAttribute("cx", x); el.setAttribute("cy", y);
+      el.setAttribute("r", Math.max(entry ? 2.5 : 1.6, (entry ? 4.2 : 2.6) * s));
+      el.setAttribute("class", "dot" + (entry ? "" : " ghost") + (entry && entry.id === selected ? " on" : "") + (entry && entry.id === freshId ? " fresh" : ""));
+      dotLayer.appendChild(el);
+      if (entry) {
+        const hit = document.createElementNS(NS, "circle");
+        hit.setAttribute("cx", x); hit.setAttribute("cy", y);
+        hit.setAttribute("r", 14);
+        hit.setAttribute("class", "hit");
+        hit.setAttribute("tabindex", "0");
+        hit.setAttribute("role", "button");
+        hit.setAttribute("aria-label", "남겨진 마음 " + (idx + 1) + "번 보기");
+        const open = (e) => { e.stopPropagation(); select(entry.id); };
+        hit.addEventListener("click", open);
+        hit.addEventListener("mouseenter", () => { if (matchMedia("(hover: hover)").matches) select(entry.id); });
+        hit.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(e); } });
+        dotLayer.appendChild(hit);
+      }
+      dots.push({ entry, el, x, y });
+    }
+    const cur = dots.find((D) => D.entry && D.entry.id === selected);
+    if (cur) placeBubble(cur.x, cur.y);
+  }
+
+  function resize() {
+    const r = field.getBoundingClientRect();
+    W = Math.max(200, r.width); H = Math.max(100, r.height);
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    draw();
+  }
+  new ResizeObserver(resize).observe(field);
+
+  /* ----- bubble ----- */
+  let bubble = null;
+  function select(id) {
+    selected = id;
+    const i = entries.findIndex((e) => e.id === id);
+    if (i < 0) { closeBubble(); return; }
+    if (!bubble) {
+      bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.addEventListener("click", (ev) => ev.stopPropagation());
+      field.appendChild(bubble);
+    }
+    bubble.textContent = "";
+    const close = document.createElement("button");
+    close.className = "close"; close.type = "button"; close.setAttribute("aria-label", "닫기"); close.textContent = "×";
+    close.addEventListener("click", closeBubble);
+    const p = document.createElement("p"); p.textContent = entries[i].text;
+    const meta = document.createElement("div"); meta.className = "meta";
+    meta.textContent = "파동 No." + String(i + 1).padStart(3, "0");
+    bubble.append(close, p, meta);
+    dots.forEach((D) => D.el.classList.toggle("on", !!D.entry && D.entry.id === id));
+    const cur = dots.find((D) => D.entry && D.entry.id === id);
+    if (cur) placeBubble(cur.x, cur.y);
+  }
+  function placeBubble(x, y) {
+    if (!bubble) return;
+    const bw = bubble.offsetWidth, bh = bubble.offsetHeight;
+    const left = Math.min(Math.max(8, x - bw / 2), W - bw - 8);
+    let top = y - bh - 16;
+    if (top < -40) top = y + 16;
+    bubble.style.left = left + "px"; bubble.style.top = top + "px";
+  }
+  function closeBubble() {
+    selected = null;
+    if (bubble) { bubble.remove(); bubble = null; }
+    dots.forEach((D) => D.el.classList.remove("on"));
+  }
+  document.addEventListener("click", (e) => { if (!field.contains(e.target)) closeBubble(); });
+  field.addEventListener("click", closeBubble);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeBubble(); });
+
+  function render() {
+    draw();
+    const n = entries.length;
+    if (!n && emptyEl.dataset.state !== "error") { emptyEl.textContent = "아직 남겨진 마음이 없습니다. 위에 첫 번째 파동을 남겨주세요."; emptyEl.hidden = false; }
+    else if (n) emptyEl.hidden = true;
+    if (selected && !entries.some((e) => e.id === selected)) closeBubble();
+    else if (selected) select(selected);
+  }
+
+  /* ----- input ----- */
+  const cfg = window.WAVE_CONFIG || {};
+  const configured = !!(cfg.supabaseUrl && cfg.supabaseAnonKey && window.supabase);
+  const client = configured ? window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey) : null;
+
+  function syncInput() { btn.disabled = !ta.value.trim() || !client; }
+  ta.addEventListener("input", syncInput);
+  ta.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); form.requestSubmit(); }
+  });
+  const setStatus = (msg) => { statusEl.textContent = msg; };
+
+  let sending = false;
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const text = ta.value.trim().slice(0, 300);
+    if (!text || !client || sending) return;
+    sending = true; btn.disabled = true; setStatus("파동을 띄우는 중…");
+    // only the text is sent; the database numbers it. No date or time is stored.
+    const { data, error } = await client.from("waves").insert({ text }).select("id, seq").single();
+    if (error) {
+      setStatus("저장하지 못했어요. 잠시 후 다시 눌러주세요.");
+    } else {
+      ta.value = "";
+      if (!entries.some((x) => x.id === data.id)) {
+        entries = [...entries, { id: data.id, text, seq: data.seq }].sort((a, b) => a.seq - b.seq);
+      }
+      freshId = data.id;
+      render();
+      setStatus("남겨주셔서 고맙습니다. 당신의 마음이 파도에 더해졌습니다.");
+      setTimeout(() => select(data.id), 300);
+      field.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    }
+    sending = false; syncInput();
+  });
+
+  /* ----- data ----- */
+  render();
+
+  if (!client) {
+    emptyEl.dataset.state = "error";
+    emptyEl.textContent = "저장소가 아직 연결되지 않았습니다. config.js를 확인해주세요.";
+    ta.disabled = true;
+    return;
+  }
+
+  let loading = false, again = false;
+  async function load() {
+    if (loading) { again = true; return; }
+    loading = true;
+    const { data, error } = await client.from("waves").select("id, text, seq").order("seq", { ascending: true }).limit(1000);
+    loading = false;
+    if (error) {
+      if (!entries.length) {
+        emptyEl.dataset.state = "error";
+        emptyEl.textContent = "남겨진 마음을 불러오지 못했습니다. 잠시 후 다시 열어주세요.";
+        emptyEl.hidden = false;
+      }
+    } else {
+      delete emptyEl.dataset.state;
+      entries = data.filter((x) => typeof x.text === "string" && x.text);
+      render();
+    }
+    if (again) { again = false; load(); }
+  }
+  load();
+  // live: new or removed stories show up for everyone without a reload
+  client.channel("waves-live")
+    .on("postgres_changes", { event: "*", schema: "public", table: "waves" }, () => load())
+    .subscribe();
+  // safety net in case the live connection drops
+  setInterval(() => { if (document.visibilityState === "visible") load(); }, 30000);
+  syncInput();
+})();
+</script>
+</body>
+</html>
