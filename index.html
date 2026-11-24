@@ -422,7 +422,8 @@ footer .contact.flash { animation: flash 1.6s ease-out; }
     // only the text is sent; the database numbers it. No date or time is stored.
     const { data, error } = await client.from("waves").insert({ text }).select("id, seq").single();
     if (error) {
-      setStatus("저장하지 못했어요. 잠시 후 다시 눌러주세요.");
+      console.error("insert failed", error);
+      setStatus("저장하지 못했어요. 잠시 후 다시 눌러주세요." + (error.code ? ` (오류 ${error.code})` : ""));
     } else {
       ta.value = "";
       if (!entries.some((x) => x.id === data.id)) {
@@ -454,6 +455,7 @@ footer .contact.flash { animation: flash 1.6s ease-out; }
     const { data, error } = await client.from("waves").select("id, text, seq").order("seq", { ascending: true }).limit(1000);
     loading = false;
     if (error) {
+      console.error("load failed", error);
       if (!entries.length) {
         emptyEl.dataset.state = "error";
         emptyEl.textContent = "남겨진 마음을 불러오지 못했습니다. 잠시 후 다시 열어주세요.";

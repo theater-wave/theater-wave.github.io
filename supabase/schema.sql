@@ -9,6 +9,10 @@ create table if not exists public.waves (
 
 alter table public.waves enable row level security;
 
+-- 새 프로젝트는 표를 외부(Data API)에 자동으로 열어주지 않으므로 직접 허용
+grant usage on schema public to anon, authenticated;
+grant select, insert on table public.waves to anon, authenticated;
+
 -- 누구나(로그인 없이) 읽기
 drop policy if exists "waves are readable by everyone" on public.waves;
 create policy "waves are readable by everyone"
