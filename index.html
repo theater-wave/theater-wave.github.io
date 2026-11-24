@@ -21,6 +21,8 @@
   --ink-head: #3e4046;
   --ink-text: #55575d;
   --sand: #c8c0b3;
+  --ink-warm: #3b3934;   /* about / info text */
+  --sand-ink: #78746b;   /* footer text on sand */
   --copy-size: 1.5625rem;
   --contact-size: 1.48rem;
   --foam: #ffffff;
@@ -107,22 +109,22 @@ h1 { margin: 4rem 0 0; text-align: center; font-weight: 200; font-size: 3rem; li
 
 /* ---------- shore ---------- */
 .about .frame { padding: 6.25rem 0 8.25rem 6.4375rem; }
-.about h2 { margin: 0; font-weight: 200; font-size: 2.6rem; line-height: 3rem; letter-spacing: -.02em; color: var(--ink-head); white-space: nowrap; }
-.about .copy { margin-top: 3.0625rem; color: var(--ink-text); font-weight: 200; font-size: var(--copy-size); line-height: 1.95rem; letter-spacing: 0; }
+.about h2 { margin: 0; font-weight: 200; font-size: 2.6rem; line-height: 3rem; letter-spacing: -.02em; color: #2c2b27; white-space: nowrap; }
+.about .copy { margin-top: 3.0625rem; color: var(--ink-warm); font-weight: 200; font-size: var(--copy-size); line-height: 1.95rem; letter-spacing: 0; }
 .about .copy p { margin: 0; }
 .about .copy p + p { margin-top: 1.5625rem; }
 .info { display: flex; align-items: stretch; gap: 1.5625rem; margin: 12rem 0 0 -.75rem; }
-.info img { display: block; width: 14.75rem; height: 20.625rem; object-fit: cover; box-shadow: 0 .25rem 1.2rem rgba(40,50,80,.12); }
-.info .when { display: flex; flex-direction: column; margin: .375rem 0 0; padding-bottom: .1rem; color: var(--ink-text); font-weight: 300; font-size: 1.375rem; line-height: 1.8rem; letter-spacing: -.01em; white-space: nowrap; }
-.info a { align-self: flex-start; margin-top: auto; color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
+.info img { display: block; width: 14.75rem; height: 20.625rem; object-fit: cover; }
+.info .when { display: flex; flex-direction: column; margin: .375rem 0 0; padding-bottom: .1rem; color: var(--ink-warm); font-weight: 300; font-size: 1.375rem; line-height: 1.8rem; letter-spacing: -.01em; white-space: nowrap; }
+.info a { align-self: flex-start; margin-top: 5.375rem; color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
 .info a:hover, .info a:focus-visible { border-bottom-color: currentColor; outline: none; }
 footer { background: var(--sand); }
 footer .frame { height: 8.0625rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .75rem; white-space: nowrap; padding-top: 0; }
-footer .contact-line { margin: 0; font-size: var(--contact-size); line-height: 1.6rem; color: var(--ink-text); font-weight: 400; }
-footer .contact-line strong { font-weight: 600; color: var(--ink-head); letter-spacing: .02em; }
+footer .contact-line { margin: 0; font-size: var(--contact-size); line-height: 1.6rem; color: var(--sand-ink); font-weight: 400; }
+footer .contact-line strong { font-weight: 600; color: inherit; letter-spacing: .02em; }
 footer .contact-line a { color: inherit; text-decoration: none; }
 footer .contact-line a:hover, footer .contact-line a:focus-visible { text-decoration: underline; outline: none; }
-footer .copy-right { margin: 0; font-size: .75rem; line-height: 1rem; color: var(--ink-soft); }
+footer .copy-right { margin: 0; font-size: .75rem; line-height: 1rem; color: var(--sand-ink); }
 @media (prefers-reduced-motion: reduce) { .field circle.dot.fresh { animation: none; } }
 </style>
 
