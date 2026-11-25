@@ -25,9 +25,9 @@
   --ink-head: #3e4046;
   --ink-text: #55575d;
   --sand: #c8c0b3;
-  --sand-ink: #888275;   /* footer text on sand */
+  --sand-ink: #7a7569;   /* footer text on sand */
   --copy-size: 1.4375rem;
-  --contact-size: 1.25rem;
+  --contact-size: 1rem;
   --foam: #ffffff;
   --font: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
   --font-round: "S-Core Dream", "IBM Plex Sans KR", "Apple SD Gothic Neo", sans-serif;
@@ -134,9 +134,10 @@ h1 { font-family: var(--font-round); margin: 6.125rem 0 0; padding-left: 2.375re
 .info a { align-self: flex-start; margin-top: 5.375rem; color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
 .info a:hover, .info a:focus-visible { border-bottom-color: currentColor; outline: none; }
 footer { background: var(--sand); font-family: var(--font-foot); }
-footer .frame { height: 8.0625rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5625rem; white-space: nowrap; padding-top: .3125rem; }
-footer .contact-line { margin: 0; font-size: var(--contact-size); line-height: 1.6rem; color: var(--sand-ink); font-weight: 400; }
-footer .contact-line strong { font-weight: inherit; color: inherit; letter-spacing: .02em; }
+footer .frame { height: 8.0625rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.125rem; white-space: nowrap; padding-top: .3125rem; }
+footer .contact-line { margin: 0; font-size: var(--contact-size); line-height: 1.6rem; color: var(--sand-ink); font-weight: 300; letter-spacing: .05em; }
+footer .contact-line strong { font-weight: 400; color: #6f6a5f; letter-spacing: .22em; }
+footer .contact-line .sep { display: inline-block; margin: 0 .9em; opacity: .45; }
 footer .contact-line a { color: inherit; text-decoration: none; }
 footer .contact-line a:hover, footer .contact-line a:focus-visible { text-decoration: underline; outline: none; }
 footer .copy-right { margin: 0; font-size: .75rem; line-height: 1rem; color: var(--sand-ink); }
@@ -219,7 +220,7 @@ footer .copy-right { margin: 0; font-size: .75rem; line-height: 1rem; color: var
 
 <footer id="contact">
   <div class="frame">
-    <p class="contact-line"><strong>CONTACT</strong> |&nbsp; Email : <a href="mailto:wave@or.kr">wave@or.kr</a> | Tel : <a href="tel:02-1234-5678">02-1234-5678</a> | Instagram : <a href="https://www.instagram.com/theater_wave" target="_blank" rel="noopener">@theater_wave</a></p>
+    <p class="contact-line"><strong>CONTACT</strong><span class="sep" aria-hidden="true">|</span>Email : <a href="mailto:wave@or.kr">wave@or.kr</a><span class="sep" aria-hidden="true">|</span>Tel : <a href="tel:02-1234-5678">02-1234-5678</a><span class="sep" aria-hidden="true">|</span>Instagram : <a href="https://www.instagram.com/theater_wave" target="_blank" rel="noopener">@theater_wave</a></p>
     <p class="copy-right">© 2026 파도가 밀려올 때. All rights reserved.</p>
   </div>
 </footer>
